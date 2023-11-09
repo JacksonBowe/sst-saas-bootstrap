@@ -19,8 +19,8 @@ export function ControlAuth({ stack }: StackContext) {
 				},
 				userInvitation: {
 					emailSubject: "Powertec NCM Invitation",
-					emailBody: "Your temporary password is {####}",
-					smsMessage: "Your temporary password is {####}",
+					emailBody: "Hello {username}, Your temporary password is {####}",
+					smsMessage: "Hello {username}, Your temporary password is {####}",
 				},
 				signInCaseSensitive: false,
 				autoVerify: { email: true },

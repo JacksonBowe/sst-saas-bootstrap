@@ -1,7 +1,10 @@
 import { SSTConfig } from "sst";
-import { ApiStack } from "./stacks/app/Api";
-import { ControlApiStack } from "./stacks/control/Api";
-import { AuthStack } from "./stacks/app/Auth";
+import { AppAuth } from "./stacks/app/Auth";
+import { AppStorage } from "./stacks/app/Storage";
+import { AppApi } from "./stacks/app/Api";
+import { ControlAuth } from "./stacks/control/Auth";
+import { ControlStorage } from "./stacks/control/Storage";
+import { ControlApi } from "./stacks/control/Api";
 
 export default {
 	config(_input) {
@@ -14,10 +17,13 @@ export default {
 	stacks(app) {
 		app.setDefaultFunctionProps({
 			runtime: "python3.11",
-            copyFiles: [{ from: "packages/core", to: "core" }]
+			copyFiles: [{ from: "packages/core", to: "core" }],
 		});
-		app.stack(AuthStack);
-		app.stack(ControlApiStack);
-		app.stack(ApiStack);
+
+		// Application Plane
+		app.stack(AppAuth).stack(AppStorage).stack(AppApi);
+
+		// Control Plane
+		app.stack(ControlAuth).stack(ControlStorage).stack(ControlApi);
 	},
 } satisfies SSTConfig;

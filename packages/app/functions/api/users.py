@@ -1,10 +1,9 @@
 import os
 import sys
-if os.getenv('IS_LOCAL'):
-    sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+if os.getenv('IS_LOCAL'): # In local dev add packages/ to path
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 
 
-from core.controllers.controller import TEST, TABLE
 
 def handler(event, context):
     
