@@ -14,6 +14,7 @@ export default {
 	stacks(app) {
 		app.setDefaultFunctionProps({
 			runtime: "python3.11",
+            copyFiles: [{ from: "packages/core", to: "core" }]
 		});
 		app.stack(AuthStack);
 		app.stack(ControlApiStack);

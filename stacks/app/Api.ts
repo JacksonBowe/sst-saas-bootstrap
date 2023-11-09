@@ -6,7 +6,9 @@ export function AppApi({ stack }: StackContext) {
 	const api = new Api(stack, "AppApi", {
 		defaults: {
 			function: {
-				copyFiles: [{ from: "packages/core", to: "core" }],
+				environment: {},
+				permissions: [],
+				bind: [],
 			},
 		},
 		routes: {
@@ -17,4 +19,8 @@ export function AppApi({ stack }: StackContext) {
 	stack.addOutputs({
 		ApiEndpoint: api.url,
 	});
+
+	return {
+		api,
+	};
 }
