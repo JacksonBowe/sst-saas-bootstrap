@@ -15,7 +15,7 @@ export function ControlApi({ stack }: StackContext) {
 	});
 
 	stack.addOutputs({
-		ApiEndpoint: api.url,
+		ControlApiEndpoint: api.url,
 	});
 
 	return {

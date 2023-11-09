@@ -1,6 +1,7 @@
 import { StackContext, Cognito } from "sst/constructs";
 import * as cognito from "aws-cdk-lib/aws-cognito";
-import { Duration, RemovalPolicy } from "aws-cdk-lib";
+import { Duration } from "aws-cdk-lib";
+import { StageRemovalPolicy } from "../settings";
 
 export function ControlAuth({ stack }: StackContext) {
 	// Cognito User Pool
@@ -25,7 +26,7 @@ export function ControlAuth({ stack }: StackContext) {
 				signInCaseSensitive: false,
 				autoVerify: { email: true },
 				accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
-				removalPolicy: RemovalPolicy.DESTROY,
+				removalPolicy: StageRemovalPolicy(stack.stage),
 				passwordPolicy: { minLength: 8 },
 				standardAttributes: {
 					email: {

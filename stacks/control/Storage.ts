@@ -1,5 +1,5 @@
 import { StackContext, Table } from "sst/constructs";
-import { RemovalPolicy } from "aws-cdk-lib";
+import { StageRemovalPolicy } from "../settings";
 
 export function ControlStorage({ stack }: StackContext) {
 	// DynamoDB table for Users
@@ -9,7 +9,7 @@ export function ControlStorage({ stack }: StackContext) {
 			SK: "string",
 		},
 		primaryIndex: { partitionKey: "PK", sortKey: "SK" },
-		cdk: { table: { removalPolicy: RemovalPolicy.DESTROY } },
+		cdk: { table: { removalPolicy: StageRemovalPolicy(stack.stage) } },
 	});
 
 	return {

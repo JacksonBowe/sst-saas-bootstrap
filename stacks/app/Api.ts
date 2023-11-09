@@ -12,12 +12,12 @@ export function AppApi({ stack }: StackContext) {
 			},
 		},
 		routes: {
-			"GET /test": "packages/functions/api/lambda.handler",
+			"POST /noauth/auth": "packages/app/functions/api/auth.handler",
 		},
 	});
 
 	stack.addOutputs({
-		ApiEndpoint: api.url,
+		AppApiEndpoint: api.url,
 	});
 
 	return {

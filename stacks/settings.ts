@@ -7,5 +7,5 @@ export const Settings = {
 };
 
 export function StageRemovalPolicy(stage: string) {
-	return Settings.removalPolicy.retainStages.includes(stage) ? RemovalPolicy.DESTROY : RemovalPolicy.RETAIN;
+	return Settings.removalPolicy.retainStages.includes(stage) ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY;
 }
