@@ -18,6 +18,12 @@ export function Api({ stack }: StackContext) {
 		},
 	});
 
+	if (stack.stage === "local") {
+		api.addRoutes(stack, {
+			"POST /seed": "packages/app/functions/api/seed.main",
+		});
+	}
+
 	stack.addOutputs({
 		AppApiEndpoint: api.url,
 	});

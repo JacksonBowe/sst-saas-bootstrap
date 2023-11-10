@@ -5,7 +5,6 @@ import { Api } from "./stacks/app/Api";
 import { ControlAuth } from "./stacks/control/Auth";
 import { ControlStorage } from "./stacks/control/Storage";
 import { ControlApi } from "./stacks/control/Api";
-import { Seed } from "./stacks/app/Seed";
 
 export default {
 	config(_input) {
@@ -23,8 +22,6 @@ export default {
 
 		// Application Plane
 		app.stack(Auth).stack(Storage).stack(Api);
-
-		if (app.stage === "local") app.stack(Seed);
 
 		// Control Plane
 		app.stack(ControlAuth).stack(ControlStorage).stack(ControlApi);
