@@ -3,9 +3,9 @@ import * as cognito from "aws-cdk-lib/aws-cognito";
 import { Duration } from "aws-cdk-lib";
 import { StageRemovalPolicy } from "../settings";
 
-export function AppAuth({ stack }: StackContext) {
+export function Auth({ stack }: StackContext) {
 	// Cognito User Pool
-	const appAuth = new Cognito(stack, "AppAuth", {
+	const appAuth = new Cognito(stack, "Auth", {
 		cdk: {
 			userPool: {
 				signInAliases: {

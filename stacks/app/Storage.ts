@@ -1,9 +1,9 @@
 import { StackContext, Table, Bucket } from "sst/constructs";
 import { StageRemovalPolicy } from "../settings";
 
-export function AppStorage({ stack }: StackContext) {
+export function Storage({ stack }: StackContext) {
 	// DynamoDB table for Users
-	const usersTable = new Table(stack, "AppUsers", {
+	const usersTable = new Table(stack, "Users", {
 		fields: {
 			PK: "string",
 			SK: "string",
@@ -13,7 +13,7 @@ export function AppStorage({ stack }: StackContext) {
 	});
 
 	// Example bucket that holds whatever - random example below for a GIS solution
-	const appBucket = new Bucket(stack, "AppBucket", {
+	const layersBucket = new Bucket(stack, "LayersBucket", {
 		notifications: {
 			layerUploaded: {
 				// Do stuff when a .toml is uploaded to the layers/ folder
@@ -41,7 +41,27 @@ export function AppStorage({ stack }: StackContext) {
 		},
 	});
 
+	// DynamoDB table for Layers - following above example
+	const layersTable = new Table(stack, "Layers", {
+		fields: {
+			PK: "string",
+			SK: "string",
+		},
+		primaryIndex: { partitionKey: "PK" },
+		globalIndexes: {},
+		cdk: {
+			table: {
+				removalPolicy: StageRemovalPolicy(stack.stage),
+			},
+		},
+	});
+
+	stack.addOutputs({
+		TestThing: StageRemovalPolicy(stack.stage),
+	});
+
 	return {
 		usersTable,
+		layersTable,
 	};
 }

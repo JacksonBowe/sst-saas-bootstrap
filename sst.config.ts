@@ -1,10 +1,11 @@
 import { SSTConfig } from "sst";
-import { AppAuth } from "./stacks/app/Auth";
-import { AppStorage } from "./stacks/app/Storage";
-import { AppApi } from "./stacks/app/Api";
+import { Auth } from "./stacks/app/Auth";
+import { Storage } from "./stacks/app/Storage";
+import { Api } from "./stacks/app/Api";
 import { ControlAuth } from "./stacks/control/Auth";
 import { ControlStorage } from "./stacks/control/Storage";
 import { ControlApi } from "./stacks/control/Api";
+import { Seed } from "./stacks/app/Seed";
 
 export default {
 	config(_input) {
@@ -21,7 +22,9 @@ export default {
 		});
 
 		// Application Plane
-		app.stack(AppAuth).stack(AppStorage).stack(AppApi);
+		app.stack(Auth).stack(Storage).stack(Api);
+
+		if (app.stage === "local") app.stack(Seed);
 
 		// Control Plane
 		app.stack(ControlAuth).stack(ControlStorage).stack(ControlApi);

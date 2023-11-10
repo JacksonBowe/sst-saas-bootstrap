@@ -7,10 +7,15 @@ export function ControlApi({ stack }: StackContext) {
 		defaults: {
 			function: {
 				copyFiles: [{ from: "packages/core", to: "core" }],
+				environment: {},
+				permissions: [],
+				bind: [],
 			},
 		},
 		routes: {
-			"GET /test": "packages/functions/api/lambda.handler",
+			// "GET /test": "packages/functions/api/lambda.handler",
+			"POST /layers": "packages/functions/api/layers.handler",
+			"GET /layers": "packages/control/functions/api/layers.handler",
 		},
 	});
 
