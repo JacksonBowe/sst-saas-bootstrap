@@ -13,12 +13,30 @@ export function ControlApi({ stack }: StackContext) {
 			},
 		},
 		routes: {
-			// "GET /test": "packages/functions/api/lambda.handler",
-			"POST /layers": "packages/control/functions/api/layers.handler",
+			// AuthController
+			"POST /noauth/auth": { function: "packages/control/functions/auth.handler", authorizer: "none" },
+			"POST /noauth/recover": { function: "packages/control/functions/auth.handler", authorizer: "none" },
+			"POST /noauth/recover/confirm": { function: "packages/control/functions/auth.handler", authorizer: "none" },
+			"POST /noauth/activate": { function: "packages/control/functions/auth.handler", authorizer: "none" },
+			"POST /noauth/refresh": { function: "packages/control/functions/auth.handler", authorizer: "none" },
+			// UserController
+			"GET /tenants/{tenantId}/users": "packages/control/functions/api/user.handler",
+			"POST /users/invite": "packages/control/functions/api/user.handler",
+			"GET /users/{userId}": "packages/control/functions/api/user.handler",
+			"DELETE /users/{userId}": "packages/control/functions/api/user.handler",
+			"GET /admin/users": "packages/control/functions/api/user.handler",
+			"POST /admin/users/invite": "packages/control/functions/api/user.handler",
+			"DELETE /admin/users/{userId}": "packages/control/functions/api/user.handler",
+			// TenantController
+			"POST /tenant": "packages/control/functions/api/tenant.handler",
+			"DELETE /tenant/{tenantId}": "packages/control/functions/api/tenant.handler",
+			// LayerController
+
 			"GET /layers": "packages/control/functions/api/layers.handler",
-			"POST /users": "packages/control/functions/api/users.handler",
-			"GET /users": "packages/control/functions/api/users.handler",
-			"GET /users/{userId}": "packages/control/functions/api/users.handler",
+			"GET /layers/{layerId}": "packages/control/functions/api/layers.handler",
+			"GET /layers/{layerId}/data": "packages/control/functions/api/layers.handler",
+			"GET /layers/{layerId}/cell": "packages/control/functions/api/layers.handler",
+			"POST /layers/{layerId}/promote": "packages/control/functions/api/layers.handler",
 		},
 	});
 
