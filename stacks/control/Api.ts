@@ -14,8 +14,11 @@ export function ControlApi({ stack }: StackContext) {
 		},
 		routes: {
 			// "GET /test": "packages/functions/api/lambda.handler",
-			"POST /layers": "packages/functions/api/layers.handler",
+			"POST /layers": "packages/control/functions/api/layers.handler",
 			"GET /layers": "packages/control/functions/api/layers.handler",
+			"POST /users": "packages/control/functions/api/users.handler",
+			"GET /users": "packages/control/functions/api/users.handler",
+			"GET /users/{userId}": "packages/control/functions/api/users.handler",
 		},
 	});
 

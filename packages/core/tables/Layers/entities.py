@@ -26,3 +26,10 @@ class Layer(Entity):
     @classmethod
     def from_primary(cls, PK, name, **kwargs):
         return cls(PK, name)
+    
+    def to_ddb(self):
+        item = self.to_dict()
+        item['PK'] = item.pop('id')
+        item['SK'] = self.SK
+        
+        return item

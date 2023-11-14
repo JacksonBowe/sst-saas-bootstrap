@@ -12,4 +12,7 @@ app = APIGatewayHttpResolver()
 
 @app.get('/layers')
 def get_layers():
-    LayerController
+    LayerController().get_layers
+    
+def handler(event, context):
+    return app.resolve(SSTEvent(event), context)
